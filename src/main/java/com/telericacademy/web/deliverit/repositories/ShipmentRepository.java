@@ -1,6 +1,8 @@
 package com.telericacademy.web.deliverit.repositories;
 
+import com.telericacademy.web.deliverit.models.Parcel;
 import com.telericacademy.web.deliverit.models.Shipment;
+import com.telericacademy.web.deliverit.models.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +13,7 @@ public interface ShipmentRepository {
 
     List<Shipment> filterByWarehouse(int warehouseId);
 
-//    List<Shipment> filterByCustomer(int customerId);
+    List<Shipment> filterByCustomer(int customerId);
 
     Shipment getById(int id);
 

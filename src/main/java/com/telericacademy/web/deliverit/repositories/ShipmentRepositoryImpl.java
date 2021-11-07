@@ -4,6 +4,7 @@ import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
 import com.telericacademy.web.deliverit.models.Shipment;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,24 +50,48 @@ public class ShipmentRepositoryImpl implements ShipmentRepository {
         try (Session session = sessionFactory.openSession()) {
 
 
-                Query<Shipment> query = session.createQuery("from Shipment where originWarehouseId.id = :id or destinationWarehouseId.id = :id", Shipment.class);
-                query.setParameter("id", warehouseId);
-                return query.list();
-            }
+            Query<Shipment> query = session.createQuery("from Shipment where originWarehouseId.id = :id or destinationWarehouseId.id = :id", Shipment.class);
+            query.setParameter("id", warehouseId);
+            return query.list();
         }
+    }
 
 //    @Override
 //    public List<Shipment> filterByCustomer(int customerId) {
 //
-//          try  (Session session=sessionFactory.openSession()){
-//              Query<Shipment> query=session.createQuery("from User where user_id =:id and ")
+//        try (Session session = sessionFactory.openSession()) {
+//
+//            NativeQuery<Shipment> query = session.createNativeQuery("SELECT  shipments.shipment_id,p.parcel_id ,u.user_id ,ur.role_id\n" +
+//                    "from shipments\n" +
+//                    "    join orders o on shipments.shipment_id = o.shipment_id\n" +
+//                    "    join parcels p on p.parcel_id = o.parcel_id\n" +
+//                    "    join users u on u.user_id = p.user_id\n" +
+//                    "    join users_roles ur on u.user_id = ur.user_id\n"
+//            );
+//            query.setParameter("customerId", customerId);
+//            query.addEntity(Shipment.class);
+//            return query.list();
 //
 //        }
 //
 //
-//
 //    }
 
+    @Override
+    public List<Shipment> filterByCustomer(int customerId) {
+
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("select  s from Shipment s " + " join s.parcels p " +"where p.user.id=:customerId",Shipment.class)
+
+
+                    .setParameter("customerId", customerId)
+                    .getResultList();
+
+
+        }
+
+
+    }
 
     @Override
     public Shipment getById(int id) {
