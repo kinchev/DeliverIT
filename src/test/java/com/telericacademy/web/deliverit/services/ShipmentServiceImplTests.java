@@ -29,7 +29,7 @@ public class ShipmentServiceImplTests {
                 .thenReturn(new ArrayList<>());
 
 
-        service.getAll(java.util.Optional.empty());
+        service.getAll();
 
 
         Mockito.verify(mockShipmentRepository, Mockito.times(1)).getAll(Optional.empty());

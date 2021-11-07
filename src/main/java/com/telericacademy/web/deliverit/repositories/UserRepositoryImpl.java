@@ -1,6 +1,7 @@
 package com.telericacademy.web.deliverit.repositories;
 
 import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
+import com.telericacademy.web.deliverit.models.Orders;
 import com.telericacademy.web.deliverit.models.Parcel;
 import com.telericacademy.web.deliverit.models.User;
 import org.hibernate.Session;
@@ -59,13 +60,33 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public List<Parcel> incomingParcels(int id) {
+        try (Session session = sessionFactory.openSession()) {
+            getById(id);
+            Query<Orders> query = session.createQuery("from Orders where parcel.user.id=:id and shipment.departureDate<current_date and shipment.arrivalDate>current_date", Orders.class);
+            query.setParameter("id", id);
+            List<Orders> orders = query.list();
+            if (orders.size() == 0) {
+                throw new EntityNotFoundException("Parcel", id);
+            }
+            List<Parcel> parcels = new ArrayList<>();
+            for (Orders order : orders) {
+                Parcel parcel = session.get(Parcel.class, order.getParcel().getId());
+
+                parcels.add(parcel);
+            }
+            return parcels;
+        }
+    }
+
+    @Override
     public List<Parcel> getUserParcels(User user) {
         try (Session session = sessionFactory.openSession()) {
             Query<Parcel> query = session.createQuery("from Parcel where user = :user", Parcel.class);
             query.setParameter("user", user);
             List<Parcel> parcels = query.list();
             if (parcels.size() == 0) {
-                throw new IllegalArgumentException(String.format("User with email %s has no parcels",user.getEmail()));
+                throw new IllegalArgumentException(String.format("User with email %s has no parcels", user.getEmail()));
             }
             return parcels;
         }

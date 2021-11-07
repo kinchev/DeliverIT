@@ -23,5 +23,6 @@ public interface UserService {
     void update(User user, User updatingUser);
 
     void delete(int id, User updatingUser);
+    List<Parcel> incomingParcels(int id);
 
 }

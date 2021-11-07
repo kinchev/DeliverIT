@@ -14,7 +14,9 @@ public interface UserRepository {
 
     User getByEmail(String email);
 
-    List<User> search (Optional<String> email, Optional<String> firstName, Optional<String>lastName);
+    List<Parcel> incomingParcels(int id);
+
+    List<User> search(Optional<String> email, Optional<String> firstName, Optional<String> lastName);
 
     List<Parcel> getUserParcels(User user);
 

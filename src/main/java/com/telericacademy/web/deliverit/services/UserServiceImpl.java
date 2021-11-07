@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class UserServiceImpl implements UserService {
 
     public static final String MODIFY_USER_ERROR_MESSAGE = "Only the user owner or admin can modify an user.";
@@ -69,20 +70,20 @@ public class UserServiceImpl implements UserService {
         if (!updatingUser.equals(user) && !updatingUser.isEmployee()) {
             throw new UnauthorizedOperationException(MODIFY_USER_ERROR_MESSAGE);
         }
-            boolean duplicateExists = true;
-            try {
-                User existingUser = getByEmail(user.getEmail());
-                if (existingUser.getId() == user.getId()) {
-                    duplicateExists = false;
-                }
-            } catch (EntityNotFoundException e) {
+        boolean duplicateExists = true;
+        try {
+            User existingUser = getByEmail(user.getEmail());
+            if (existingUser.getId() == user.getId()) {
                 duplicateExists = false;
             }
-            if (duplicateExists) {
-                throw new DuplicateEntityException("User", "email", user.getEmail());
-            }
-            userRepository.update(user);
+        } catch (EntityNotFoundException e) {
+            duplicateExists = false;
         }
+        if (duplicateExists) {
+            throw new DuplicateEntityException("User", "email", user.getEmail());
+        }
+        userRepository.update(user);
+    }
 
     @Override
     public void delete(int id, User updatingUser) {
@@ -91,6 +92,11 @@ public class UserServiceImpl implements UserService {
             throw new UnauthorizedOperationException(MODIFY_USER_ERROR_MESSAGE);
         }
         userRepository.delete(id);
+    }
+
+    @Override
+    public List<Parcel> incomingParcels(int id) {
+        return userRepository.incomingParcels(id);
     }
 
 

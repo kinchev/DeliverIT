@@ -78,9 +78,9 @@ public class UserController {
 
     @GetMapping("/search")
     public List<User> search(@RequestHeader HttpHeaders headers,
-                               @RequestParam(required = false) Optional<String> email,
-                               @RequestParam(required = false) Optional<String> firstName,
-                               @RequestParam(required = false) Optional<String> lastName
+                             @RequestParam(required = false) Optional<String> email,
+                             @RequestParam(required = false) Optional<String> firstName,
+                             @RequestParam(required = false) Optional<String> lastName
     ) {
         try {
             User user = authenticationHelper.tryGetUser(headers);
@@ -104,7 +104,15 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
-
+    @GetMapping("/{id}/incoming-parcels")
+    public List<Parcel> incomingParcels(@RequestHeader HttpHeaders headers,@PathVariable int id){
+        try {
+            User user = getById(headers, id);
+            return userService.getUserParcels(user);
+        } catch (EntityNotFoundException | IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+    }
     @PostMapping
     public User create(@Valid @RequestBody UserDto userDto) {
         try {
