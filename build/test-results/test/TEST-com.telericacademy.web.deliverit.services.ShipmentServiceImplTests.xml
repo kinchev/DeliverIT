@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.telericacademy.web.deliverit.services.ShipmentServiceImplTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-07T07:32:58" hostname="DESKTOP-5NV1LGC" time="0.769">
+  <properties/>
+  <testcase name="getById_should_returnShipment_when_matchExist()" classname="com.telericacademy.web.deliverit.services.ShipmentServiceImplTests" time="0.752"/>
+  <testcase name="getAll_should_callRepository()" classname="com.telericacademy.web.deliverit.services.ShipmentServiceImplTests" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
