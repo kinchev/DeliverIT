@@ -1,7 +1,8 @@
 package com.telericacademy.web.deliverit.services;
 
 import com.telericacademy.web.deliverit.models.Country;
-import com.telericacademy.web.deliverit.repositories.CountryRepository;
+import com.telericacademy.web.deliverit.repositories.contracts.CountryRepository;
+import com.telericacademy.web.deliverit.services.contracts.CountryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

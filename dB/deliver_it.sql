@@ -19,14 +19,14 @@ USE `deliverit`;
 
 -- Dumping structure for table deliverit.addresses
 CREATE TABLE IF NOT EXISTS `addresses` (
-  `аddress_id` int(11) NOT NULL AUTO_INCREMENT,
-  `city_id` int(11) NOT NULL,
-  `street_name` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`аddress_id`),
-  UNIQUE KEY `Addresses_AddressID_uindex` (`аddress_id`),
-  KEY `addresses_cities_fk` (`city_id`),
-  CONSTRAINT `addresses_cities_fk` FOREIGN KEY (`city_id`) REFERENCES `cities` (`city_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+    `аddress_id` int(11) NOT NULL AUTO_INCREMENT,
+    `city_id` int(11) NOT NULL,
+    `street_name` varchar(30) DEFAULT NULL,
+    PRIMARY KEY (`аddress_id`),
+    UNIQUE KEY `Addresses_AddressID_uindex` (`аddress_id`),
+    KEY `addresses_cities_fk` (`city_id`),
+    CONSTRAINT `addresses_cities_fk` FOREIGN KEY (`city_id`) REFERENCES `cities` (`city_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.addresses: ~20 rows (approximately)
 /*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
@@ -55,11 +55,11 @@ INSERT IGNORE INTO `addresses` (`address_id`, `city_id`, `street_name`) VALUES
 
 -- Dumping structure for table deliverit.categories
 CREATE TABLE IF NOT EXISTS `categories` (
-  `category_id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_name` varchar(30) NOT NULL,
-  PRIMARY KEY (`category_id`),
-  UNIQUE KEY `Categories_CategoryID_uindex` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+    `category_id` int(11) NOT NULL AUTO_INCREMENT,
+    `category_name` varchar(30) NOT NULL,
+    PRIMARY KEY (`category_id`),
+    UNIQUE KEY `Categories_CategoryID_uindex` (`category_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.categories: ~8 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
@@ -76,14 +76,14 @@ INSERT IGNORE INTO `categories` (`category_id`, `category_name`) VALUES
 
 -- Dumping structure for table deliverit.cities
 CREATE TABLE IF NOT EXISTS `cities` (
-  `city_id` int(11) NOT NULL AUTO_INCREMENT,
-  `city_name` varchar(30) NOT NULL,
-  `country_id` int(11) NOT NULL,
-  PRIMARY KEY (`city_id`),
-  UNIQUE KEY `Cities_CityID_uindex` (`city_id`),
-  KEY `cities_countries_fk` (`country_id`),
-  CONSTRAINT `cities_countries_fk` FOREIGN KEY (`country_id`) REFERENCES `countries` (`country_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+    `city_id` int(11) NOT NULL AUTO_INCREMENT,
+    `city_name` varchar(30) NOT NULL,
+    `country_id` int(11) NOT NULL,
+    PRIMARY KEY (`city_id`),
+    UNIQUE KEY `Cities_CityID_uindex` (`city_id`),
+    KEY `cities_countries_fk` (`country_id`),
+    CONSTRAINT `cities_countries_fk` FOREIGN KEY (`country_id`) REFERENCES `countries` (`country_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.cities: ~20 rows (approximately)
 /*!40000 ALTER TABLE `cities` DISABLE KEYS */;
@@ -112,11 +112,11 @@ INSERT IGNORE INTO `cities` (`city_id`, `city_name`, `country_id`) VALUES
 
 -- Dumping structure for table deliverit.countries
 CREATE TABLE IF NOT EXISTS `countries` (
-  `country_id` int(11) NOT NULL AUTO_INCREMENT,
-  `country_name` varchar(30) NOT NULL,
-  PRIMARY KEY (`country_id`),
-  UNIQUE KEY `Countries_CountryID_uindex` (`country_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+    `country_id` int(11) NOT NULL AUTO_INCREMENT,
+    `country_name` varchar(30) NOT NULL,
+    PRIMARY KEY (`country_id`),
+    UNIQUE KEY `Countries_CountryID_uindex` (`country_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.countries: ~11 rows (approximately)
 /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
@@ -136,16 +136,16 @@ INSERT IGNORE INTO `countries` (`country_id`, `country_name`) VALUES
 
 -- Dumping structure for table deliverit.orders
 CREATE TABLE IF NOT EXISTS `orders` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `parcel_id` int(11) NOT NULL,
-  `shipment_id` int(11) NOT NULL,
-  PRIMARY KEY (`order_id`),
-  UNIQUE KEY `orders_order_id_uindex` (`order_id`),
-  KEY `orders_parcels_fk` (`parcel_id`),
-  KEY `orders_shipments_fk` (`shipment_id`),
-  CONSTRAINT `orders_parcels_fk` FOREIGN KEY (`parcel_id`) REFERENCES `parcels` (`parcel_id`),
-  CONSTRAINT `orders_shipments_fk` FOREIGN KEY (`shipment_id`) REFERENCES `shipments` (`shipment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    `order_id` int(11) NOT NULL AUTO_INCREMENT,
+    `parcel_id` int(11) NOT NULL,
+    `shipment_id` int(11) NOT NULL,
+    PRIMARY KEY (`order_id`),
+    UNIQUE KEY `orders_order_id_uindex` (`order_id`),
+    KEY `orders_parcels_fk` (`parcel_id`),
+    KEY `orders_shipments_fk` (`shipment_id`),
+    CONSTRAINT `orders_parcels_fk` FOREIGN KEY (`parcel_id`) REFERENCES `parcels` (`parcel_id`),
+    CONSTRAINT `orders_shipments_fk` FOREIGN KEY (`shipment_id`) REFERENCES `shipments` (`shipment_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.orders: ~0 rows (approximately)
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
@@ -164,25 +164,25 @@ INSERT IGNORE INTO `orders` (`order_id`, `parcel_id`, `shipment_id`) VALUES
 
 -- Dumping structure for table deliverit.parcels
 CREATE TABLE IF NOT EXISTS `parcels` (
-  `parcel_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `origin_warehouse_id` int(11) NOT NULL,
-  `destination_warehouse_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `weight` double DEFAULT NULL,
-  `deliver_to_user` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`parcel_id`),
-  UNIQUE KEY `Parcells_ParcellID_uindex` (`parcel_id`),
-  KEY `parcells_deliverytypes_DeliveryTypeID_fk` (`deliver_to_user`),
-  KEY `parcels_users_fk` (`user_id`),
-  KEY `parcels_categories_fk` (`category_id`),
-  KEY `parcels_destination_warehouse_warehouses_fk` (`destination_warehouse_id`),
-  KEY `parcels_origin_warehouse_warehouses_fk` (`origin_warehouse_id`),
-  CONSTRAINT `parcels_categories_fk` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
-  CONSTRAINT `parcels_destination_warehouse_warehouses_fk` FOREIGN KEY (`destination_warehouse_id`) REFERENCES `warehouses` (`warehouse_id`),
-  CONSTRAINT `parcels_origin_warehouse_warehouses_fk` FOREIGN KEY (`origin_warehouse_id`) REFERENCES `warehouses` (`warehouse_id`),
-  CONSTRAINT `parcels_users_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    `parcel_id` int(11) NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NOT NULL,
+    `origin_warehouse_id` int(11) NOT NULL,
+    `destination_warehouse_id` int(11) NOT NULL,
+    `category_id` int(11) NOT NULL,
+    `weight` double DEFAULT NULL,
+    `deliver_to_user` tinyint(1) DEFAULT NULL,
+    PRIMARY KEY (`parcel_id`),
+    UNIQUE KEY `Parcells_ParcellID_uindex` (`parcel_id`),
+    KEY `parcells_deliverytypes_DeliveryTypeID_fk` (`deliver_to_user`),
+    KEY `parcels_users_fk` (`user_id`),
+    KEY `parcels_categories_fk` (`category_id`),
+    KEY `parcels_destination_warehouse_warehouses_fk` (`destination_warehouse_id`),
+    KEY `parcels_origin_warehouse_warehouses_fk` (`origin_warehouse_id`),
+    CONSTRAINT `parcels_categories_fk` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
+    CONSTRAINT `parcels_destination_warehouse_warehouses_fk` FOREIGN KEY (`destination_warehouse_id`) REFERENCES `warehouses` (`warehouse_id`),
+    CONSTRAINT `parcels_origin_warehouse_warehouses_fk` FOREIGN KEY (`origin_warehouse_id`) REFERENCES `warehouses` (`warehouse_id`),
+    CONSTRAINT `parcels_users_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.parcels: ~10 rows (approximately)
 /*!40000 ALTER TABLE `parcels` DISABLE KEYS */;
@@ -201,11 +201,11 @@ INSERT IGNORE INTO `parcels` (`parcel_id`, `user_id`, `origin_warehouse_id`, `de
 
 -- Dumping structure for table deliverit.roles
 CREATE TABLE IF NOT EXISTS `roles` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cityName` varchar(30) NOT NULL,
-  PRIMARY KEY (`role_id`),
-  UNIQUE KEY `roles_role_id_uindex` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    `role_id` int(11) NOT NULL AUTO_INCREMENT,
+    `cityName` varchar(30) NOT NULL,
+    PRIMARY KEY (`role_id`),
+    UNIQUE KEY `roles_role_id_uindex` (`role_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.roles: ~2 rows (approximately)
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
@@ -216,18 +216,18 @@ INSERT IGNORE INTO `roles` (`role_id`, `cityName`) VALUES
 
 -- Dumping structure for table deliverit.shipments
 CREATE TABLE IF NOT EXISTS `shipments` (
-  `shipment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `origin_warehouse_id` int(11) NOT NULL,
-  `destination_warehouse_id` int(11) NOT NULL,
-  `departure_date` date DEFAULT NULL,
-  `arrival_date` date DEFAULT NULL,
-  PRIMARY KEY (`shipment_id`),
-  UNIQUE KEY `Shipments_ShipmentID_uindex` (`shipment_id`),
-  KEY `shipments_destination_warehouse_warehouses_fk` (`destination_warehouse_id`),
-  KEY `shipments_origin_warehouse_warehouses_fk` (`origin_warehouse_id`),
-  CONSTRAINT `shipments_destination_warehouse_warehouses_fk` FOREIGN KEY (`destination_warehouse_id`) REFERENCES `warehouses` (`warehouse_id`),
-  CONSTRAINT `shipments_origin_warehouse_warehouses_fk` FOREIGN KEY (`origin_warehouse_id`) REFERENCES `warehouses` (`warehouse_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    `shipment_id` int(11) NOT NULL AUTO_INCREMENT,
+    `origin_warehouse_id` int(11) NOT NULL,
+    `destination_warehouse_id` int(11) NOT NULL,
+    `departure_date` date DEFAULT NULL,
+    `arrival_date` date DEFAULT NULL,
+    PRIMARY KEY (`shipment_id`),
+    UNIQUE KEY `Shipments_ShipmentID_uindex` (`shipment_id`),
+    KEY `shipments_destination_warehouse_warehouses_fk` (`destination_warehouse_id`),
+    KEY `shipments_origin_warehouse_warehouses_fk` (`origin_warehouse_id`),
+    CONSTRAINT `shipments_destination_warehouse_warehouses_fk` FOREIGN KEY (`destination_warehouse_id`) REFERENCES `warehouses` (`warehouse_id`),
+    CONSTRAINT `shipments_origin_warehouse_warehouses_fk` FOREIGN KEY (`origin_warehouse_id`) REFERENCES `warehouses` (`warehouse_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.shipments: ~4 rows (approximately)
 /*!40000 ALTER TABLE `shipments` DISABLE KEYS */;
@@ -240,17 +240,17 @@ INSERT IGNORE INTO `shipments` (`shipment_id`, `origin_warehouse_id`, `destinati
 
 -- Dumping structure for table deliverit.users
 CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) DEFAULT NULL,
-  `address_id` int(11) DEFAULT NULL,
-  `email` varchar(50) NOT NULL,
-  PRIMARY KEY (`user_id`),
-  KEY `users_address_fk1` (`address_id`),
-  CONSTRAINT `users_address_fk1` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`аddress_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+    `user_id` int(11) NOT NULL AUTO_INCREMENT,
+
+    `password` varchar(50) NOT NULL,
+    `first_name` varchar(30) NOT NULL,
+    `last_name` varchar(30) DEFAULT NULL,
+    `address_id` int(11) DEFAULT NULL,
+    `email` varchar(50) NOT NULL,
+    PRIMARY KEY (`user_id`),
+    KEY `users_address_fk1` (`address_id`),
+    CONSTRAINT `users_address_fk1` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`аddress_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.users: ~14 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
@@ -273,13 +273,13 @@ INSERT IGNORE INTO `users` (`user_id`, `username`, `password`, `first_name`, `la
 
 -- Dumping structure for table deliverit.users_roles
 CREATE TABLE IF NOT EXISTS `users_roles` (
-  `user_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  KEY `users_roles_roles_role_id_fk` (`role_id`),
-  KEY `users_roles_users_user_id_fk` (`user_id`),
-  CONSTRAINT `users_roles_roles_role_id_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`),
-  CONSTRAINT `users_roles_users_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    `user_id` int(11) NOT NULL,
+    `role_id` int(11) NOT NULL,
+    KEY `users_roles_roles_role_id_fk` (`role_id`),
+    KEY `users_roles_users_user_id_fk` (`user_id`),
+    CONSTRAINT `users_roles_roles_role_id_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`),
+    CONSTRAINT `users_roles_users_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.users_roles: ~14 rows (approximately)
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
@@ -302,13 +302,13 @@ INSERT IGNORE INTO `users_roles` (`user_id`, `role_id`) VALUES
 
 -- Dumping structure for table deliverit.warehouses
 CREATE TABLE IF NOT EXISTS `warehouses` (
-  `warehouse_id` int(11) NOT NULL AUTO_INCREMENT,
-  `address_id` int(11) NOT NULL,
-  PRIMARY KEY (`warehouse_id`),
-  UNIQUE KEY `Warehouses_warehouseID_uindex` (`warehouse_id`),
-  KEY `warehouses_addresses_fk` (`address_id`),
-  CONSTRAINT `warehouses_addresses_fk` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`аddress_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    `warehouse_id` int(11) NOT NULL AUTO_INCREMENT,
+    `address_id` int(11) NOT NULL,
+    PRIMARY KEY (`warehouse_id`),
+    UNIQUE KEY `Warehouses_warehouseID_uindex` (`warehouse_id`),
+    KEY `warehouses_addresses_fk` (`address_id`),
+    CONSTRAINT `warehouses_addresses_fk` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`аddress_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table deliverit.warehouses: ~4 rows (approximately)
 /*!40000 ALTER TABLE `warehouses` DISABLE KEYS */;

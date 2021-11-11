@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "warehouses")
@@ -19,7 +20,6 @@ public class Warehouse {
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
-
 
 
     public Warehouse() {
@@ -40,4 +40,19 @@ public class Warehouse {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Warehouse warehouse = (Warehouse) o;
+        return getId() == warehouse.getId() &&
+                Objects.equals(getAddress(), warehouse.getAddress());
+    }
+
+    @Override
+    public int hashCode() {;
+        return Objects.hash(getId(), getAddress());
+    }
+
 }

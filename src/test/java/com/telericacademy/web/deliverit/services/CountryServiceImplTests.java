@@ -1,7 +1,7 @@
 package com.telericacademy.web.deliverit.services;
 
 import com.telericacademy.web.deliverit.models.Country;
-import com.telericacademy.web.deliverit.repositories.CountryRepository;
+import com.telericacademy.web.deliverit.repositories.contracts.CountryRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

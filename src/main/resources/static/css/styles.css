@@ -1,0 +1,29 @@
+.table {
+    display: table;
+    padding-left:40px;
+    border-bottom-color: gold;
+
+
+}
+
+.header {
+    display: table-header-group;
+    font-weight: bold;
+}
+
+.rowGroup {
+    display: table-row-group;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    width: 25%;
+}
+
+.error {
+    color: red;
+}

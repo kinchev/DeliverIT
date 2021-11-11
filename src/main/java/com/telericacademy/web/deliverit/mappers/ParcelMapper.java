@@ -1,7 +1,8 @@
 package com.telericacademy.web.deliverit.mappers;
 
 import com.telericacademy.web.deliverit.models.*;
-import com.telericacademy.web.deliverit.repositories.*;
+import com.telericacademy.web.deliverit.models.dto.ParcelDto;
+import com.telericacademy.web.deliverit.repositories.contracts.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

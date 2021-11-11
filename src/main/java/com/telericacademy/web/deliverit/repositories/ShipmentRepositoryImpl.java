@@ -2,9 +2,9 @@ package com.telericacademy.web.deliverit.repositories;
 
 import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
 import com.telericacademy.web.deliverit.models.Shipment;
+import com.telericacademy.web.deliverit.repositories.contracts.ShipmentRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -50,7 +50,7 @@ public class ShipmentRepositoryImpl implements ShipmentRepository {
         try (Session session = sessionFactory.openSession()) {
 
 
-            Query<Shipment> query = session.createQuery("from Shipment where originWarehouseId.id = :id or destinationWarehouseId.id = :id", Shipment.class);
+            Query<Shipment> query = session.createQuery("from Shipment where originWarehouse.id = :id or destinationWarehouse.id = :id", Shipment.class);
             query.setParameter("id", warehouseId);
             return query.list();
         }
@@ -79,18 +79,12 @@ public class ShipmentRepositoryImpl implements ShipmentRepository {
 
     @Override
     public List<Shipment> filterByCustomer(int customerId) {
-
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("select  s from Shipment s " + " join s.parcels p " +"where p.user.id=:customerId",Shipment.class)
-
+            return session.createQuery("select  s from Shipment s " + " join s.parcels p " + "where p.user.id=:customerId", Shipment.class)
 
                     .setParameter("customerId", customerId)
                     .getResultList();
-
-
         }
-
-
     }
 
     @Override
@@ -103,6 +97,17 @@ public class ShipmentRepositoryImpl implements ShipmentRepository {
             return shipment;
         }
     }
+
+    @Override
+    public Shipment getByParcel(int parcelId) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("select  s from Shipment s " + " join s.parcels p " + "where p.id=:parcelId", Shipment.class)
+                    .setParameter("parcelId", parcelId)
+                    .getResultList().get(0);
+        }
+    }
+
+
 //
 //    @Override
 //    public List<Shipment> filter(Optional<Integer> originWarehouseId, Optional<Integer> destinationWarehouseId) {
@@ -163,6 +168,8 @@ public class ShipmentRepositoryImpl implements ShipmentRepository {
 
 
     }
+
+
 
 
 //    private Integer getNumberValueIfPresent(String str) {

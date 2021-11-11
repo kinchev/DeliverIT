@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,11 +17,11 @@ public class Shipment {
 
     @ManyToOne
     @JoinColumn(name = "origin_warehouse_id")
-    private Warehouse originWarehouseId;
+    private Warehouse originWarehouse;
 
     @ManyToOne
     @JoinColumn(name = "destination_warehouse_id")
-    private Warehouse destinationWarehouseId;
+    private Warehouse destinationWarehouse;
 
     @Column(name = "arrival_date")
     private LocalDate arrivalDate;
@@ -75,21 +76,20 @@ public class Shipment {
         this.parcels = parcels;
     }
 
-    public Warehouse getOriginWarehouseId() {
-        return originWarehouseId;
+    public Warehouse getOriginWarehouse() {
+        return originWarehouse;
     }
 
-    public void setOriginWarehouseId(Warehouse originWarehouseId) {
-        this.originWarehouseId = originWarehouseId;
+    public void setOriginWarehouse(Warehouse originWarehouse) {
+        this.originWarehouse = originWarehouse;
     }
 
-
-    public Warehouse getDestinationWarehouseId() {
-        return destinationWarehouseId;
+    public Warehouse getDestinationWarehouse() {
+        return destinationWarehouse;
     }
 
-    public void setDestinationWarehouseId(Warehouse destinationWarehouseId) {
-        this.destinationWarehouseId = destinationWarehouseId;
+    public void setDestinationWarehouse(Warehouse destinationWarehouse) {
+        this.destinationWarehouse = destinationWarehouse;
     }
 
     public LocalDate getArrivalDate() {
@@ -106,5 +106,23 @@ public class Shipment {
 
     public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shipment shipment = (Shipment) o;
+        return getId() == shipment.getId() &&
+                Objects.equals(getOriginWarehouse(), shipment.getOriginWarehouse()) &&
+                Objects.equals(getDestinationWarehouse(), shipment.getDestinationWarehouse()) &&
+                Objects.equals(getArrivalDate(), shipment.getArrivalDate()) &&
+                Objects.equals(getDepartureDate(), shipment.getDepartureDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getOriginWarehouse(), getDestinationWarehouse(),
+                getDepartureDate(), getArrivalDate(), getParcels());
     }
 }

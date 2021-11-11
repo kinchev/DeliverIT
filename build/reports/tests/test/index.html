@@ -20,13 +20,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">2</div>
+<div class="counter">23</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">2</div>
 <p>failures</p>
 </div>
 </td>
@@ -38,7 +38,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.768s</div>
+<div class="counter">0.886s</div>
 <p>duration</p>
 </div>
 </td>
@@ -47,8 +47,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">91%</div>
 <p>successful</p>
 </div>
 </td>
@@ -58,13 +58,29 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Packages</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Classes</a>
+<a href="#tab1">Packages</a>
+</li>
+<li>
+<a href="#tab2">Classes</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<ul class="linkList">
+<li>
+<a href="classes/com.telericacademy.web.deliverit.services.ShipmentServiceImplTests.html">ShipmentServiceImplTests</a>.
+<a href="classes/com.telericacademy.web.deliverit.services.ShipmentServiceImplTests.html#delete_should_throwException_when_userIsNotEmployee()">delete_should_throwException_when_userIsNotEmployee()</a>
+</li>
+<li>
+<a href="classes/com.telericacademy.web.deliverit.services.ShipmentServiceImplTests.html">ShipmentServiceImplTests</a>.
+<a href="classes/com.telericacademy.web.deliverit.services.ShipmentServiceImplTests.html#update_should_throwException_when_userIsNotEmployee()">update_should_throwException_when_userIsNotEmployee()</a>
+</li>
+</ul>
+</div>
+<div id="tab1" class="tab">
 <h2>Packages</h2>
 <table>
 <thead>
@@ -80,18 +96,38 @@
 <tbody>
 <tr>
 <td class="success">
+<a href="packages/com.telericacademy.web.deliverit.html">com.telericacademy.web.deliverit</a>
+</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.007s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/com.telericacademy.web.deliverit.controllers.html">com.telericacademy.web.deliverit.controllers</a>
+</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0.530s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
 <a href="packages/com.telericacademy.web.deliverit.services.html">com.telericacademy.web.deliverit.services</a>
 </td>
+<td>18</td>
 <td>2</td>
 <td>0</td>
-<td>0</td>
-<td>0.768s</td>
-<td class="success">100%</td>
+<td>0.349s</td>
+<td class="failures">88%</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Classes</h2>
 <table>
 <thead>
@@ -107,12 +143,72 @@
 <tbody>
 <tr>
 <td class="success">
-<a href="classes/com.telericacademy.web.deliverit.services.ShipmentServiceImplTests.html">com.telericacademy.web.deliverit.services.ShipmentServiceImplTests</a>
+<a href="classes/com.telericacademy.web.deliverit.DeliveritApplicationTests.html">com.telericacademy.web.deliverit.DeliveritApplicationTests</a>
+</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.007s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/com.telericacademy.web.deliverit.controllers.CityControllerTests.html">com.telericacademy.web.deliverit.controllers.CityControllerTests</a>
 </td>
 <td>2</td>
 <td>0</td>
 <td>0</td>
-<td>0.768s</td>
+<td>0.503s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/com.telericacademy.web.deliverit.controllers.CountryControllerTests.html">com.telericacademy.web.deliverit.controllers.CountryControllerTests</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.027s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/com.telericacademy.web.deliverit.services.CityServiceImplTests.html">com.telericacademy.web.deliverit.services.CityServiceImplTests</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.112s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/com.telericacademy.web.deliverit.services.CountryServiceImplTests.html">com.telericacademy.web.deliverit.services.CountryServiceImplTests</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.027s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.telericacademy.web.deliverit.services.ShipmentServiceImplTests.html">com.telericacademy.web.deliverit.services.ShipmentServiceImplTests</a>
+</td>
+<td>5</td>
+<td>2</td>
+<td>0</td>
+<td>0.044s</td>
+<td class="failures">60%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/com.telericacademy.web.deliverit.services.WarehouseServiceImplTests.html">com.telericacademy.web.deliverit.services.WarehouseServiceImplTests</a>
+</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>0.166s</td>
 <td class="success">100%</td>
 </tr>
 </tbody>
@@ -126,7 +222,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.2</a> at Nov 7, 2021, 9:32:59 AM</p>
+<a href="http://www.gradle.org">Gradle 7.2</a> at Nov 11, 2021, 12:58:49 AM</p>
 </div>
 </div>
 </body>

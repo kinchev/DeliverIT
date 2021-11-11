@@ -5,7 +5,8 @@ import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
 import com.telericacademy.web.deliverit.exceptions.UnauthorizedOperationException;
 import com.telericacademy.web.deliverit.models.Parcel;
 import com.telericacademy.web.deliverit.models.User;
-import com.telericacademy.web.deliverit.repositories.ParcelRepository;
+import com.telericacademy.web.deliverit.repositories.contracts.ParcelRepository;
+import com.telericacademy.web.deliverit.services.contracts.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

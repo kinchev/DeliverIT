@@ -2,6 +2,7 @@ package com.telericacademy.web.deliverit.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "addresses")
@@ -47,5 +48,20 @@ public class Address {
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
-}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return getId() == address.getId() &&
+                Objects.equals(getCity(), address.getCity()) &&
+                getStreetName().equals(address.getStreetName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getCity(), getStreetName());
+    }
+
+}

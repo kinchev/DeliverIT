@@ -2,14 +2,13 @@ package com.telericacademy.web.deliverit.repositories;
 
 import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
 import com.telericacademy.web.deliverit.models.Orders;
-import com.telericacademy.web.deliverit.models.Parcel;
+import com.telericacademy.web.deliverit.repositories.contracts.OrdersRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Access;
 import java.util.List;
 
 @Repository

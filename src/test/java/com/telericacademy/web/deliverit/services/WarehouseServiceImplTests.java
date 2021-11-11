@@ -5,7 +5,7 @@ import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
 import com.telericacademy.web.deliverit.exceptions.UnauthorizedOperationException;
 import com.telericacademy.web.deliverit.models.User;
 import com.telericacademy.web.deliverit.models.Warehouse;
-import com.telericacademy.web.deliverit.repositories.WarehouseRepository;
+import com.telericacademy.web.deliverit.repositories.contracts.WarehouseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

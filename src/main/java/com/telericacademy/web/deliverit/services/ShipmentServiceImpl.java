@@ -7,18 +7,18 @@ import com.telericacademy.web.deliverit.exceptions.UnauthorizedOperationExceptio
 import com.telericacademy.web.deliverit.models.Parcel;
 import com.telericacademy.web.deliverit.models.Shipment;
 import com.telericacademy.web.deliverit.models.User;
-import com.telericacademy.web.deliverit.repositories.ShipmentRepository;
+import com.telericacademy.web.deliverit.repositories.contracts.ShipmentRepository;
+import com.telericacademy.web.deliverit.services.contracts.ShipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShipmentServiceImpl implements ShipmentService {
     private static final String MODIFY_USER_ERROR_MESSAGE = "This operation with shipment is allowed to be done only by employees.";
 
-    ShipmentRepository shipmentRepository;
+    private final ShipmentRepository shipmentRepository;
 
     @Autowired
     public ShipmentServiceImpl(ShipmentRepository shipmentRepository) {
@@ -104,6 +104,51 @@ public class ShipmentServiceImpl implements ShipmentService {
             throw new UnauthorizedOperationException(MODIFY_USER_ERROR_MESSAGE);
         }
         shipmentRepository.delete(id);
+    }
+
+    @Override
+    public Shipment addParcelToShipment(Shipment shipment, Parcel parcel, User user) {
+        if (!user.isEmployee()) {
+            throw new UnauthorizedOperationException(MODIFY_USER_ERROR_MESSAGE);
+        }
+        if(shipment.getOriginWarehouse().getId() != parcel.getOriginWarehouse().getId()) {
+            throw new InvalidUserInputException("The Origin Warehouse of Shipment and Parcel must be same");
+        }
+        if(shipment.getDestinationWarehouse().getId() != parcel.getDestinationWarehouse().getId()) {
+            throw new InvalidUserInputException("The Destination Warehouse of Shipment and Parcel must be same");
+        }
+        var parcels = shipment.getParcels();
+        if (parcels.contains(parcel)) {
+            throw new DuplicateEntityException(String.format("Parcel with id %d is already included in Shipment with id %d",
+                    parcel.getId(), shipment.getId()));
+        }
+        parcels.add(parcel);
+        shipment.setParcels(parcels);
+        shipmentRepository.update(shipment);
+        return shipment;
+    }
+
+    @Override
+    public Shipment removeParcelFromShipment(Shipment shipment, Parcel parcel, User user) {
+        if (!user.isEmployee()) {
+            throw new UnauthorizedOperationException(MODIFY_USER_ERROR_MESSAGE);
+        }
+        if (shipment == null) {
+
+            throw new EntityNotFoundException("Shipment", shipment.getId());
+        }
+        if (parcel == null) {
+            throw new EntityNotFoundException("Parcel", parcel.getId());
+        }
+        var parcels = shipment.getParcels();
+        if (!parcels.contains(parcel)) {
+            throw new EntityNotFoundException(String.format("Parcel with id %d is not included in shipment with id %d",
+                    parcel.getId(), shipment.getId()));
+        }
+        parcels.remove(parcel);
+        shipment.setParcels(parcels);
+        shipmentRepository.update(shipment);
+        return shipment;
     }
 
 

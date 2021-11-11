@@ -9,24 +9,28 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private int id;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email")
     private String email;
 
+    @JsonIgnore
+    @Column(name = "password")
+    private String password;
+
     @ManyToOne
-    @JoinColumn(name="address_id")
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -38,12 +42,12 @@ public class User {
     private Set<Role> roles;
 
 
-    public User(int id, String username, String password, String firstName,
-                String lastName, String email, Address address, Set<Role> roles) {
+    public User(int id, String firstName, String lastName, String email, String password, Address address, Set<Role> roles) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.address = address;
         this.roles = roles;
     }
@@ -88,8 +92,12 @@ public class User {
         return address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -98,6 +106,10 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @JsonIgnore
@@ -110,12 +122,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return email.equals(user.email);
+        return getEmail().equals(user.getEmail());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email);
+        return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getAddress(), getRoles());
     }
 
 }

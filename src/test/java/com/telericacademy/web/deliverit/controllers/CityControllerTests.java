@@ -2,7 +2,7 @@ package com.telericacademy.web.deliverit.controllers;
 
 import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
 import com.telericacademy.web.deliverit.models.City;
-import com.telericacademy.web.deliverit.services.CityService;
+import com.telericacademy.web.deliverit.services.contracts.CityService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

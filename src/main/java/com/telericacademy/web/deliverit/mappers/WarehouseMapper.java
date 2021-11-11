@@ -1,8 +1,9 @@
 package com.telericacademy.web.deliverit.mappers;
 
 import com.telericacademy.web.deliverit.models.*;
-import com.telericacademy.web.deliverit.repositories.AddressRepository;
-import com.telericacademy.web.deliverit.repositories.WarehouseRepository;
+import com.telericacademy.web.deliverit.models.dto.WarehouseDto;
+import com.telericacademy.web.deliverit.repositories.contracts.AddressRepository;
+import com.telericacademy.web.deliverit.repositories.contracts.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -3,6 +3,7 @@ package com.telericacademy.web.deliverit.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "categories")
@@ -33,6 +34,22 @@ public class Category {
     }
 
     public void setName(String name) {
-        this.categoryName =categoryName;
+        this.categoryName = categoryName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return getId() == category.getId() &&
+                getName().equals(category.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        ;
+        return Objects.hash(getId(), getName());
+    }
+
 }

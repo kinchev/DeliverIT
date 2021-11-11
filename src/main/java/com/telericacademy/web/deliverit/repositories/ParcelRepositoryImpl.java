@@ -2,6 +2,7 @@ package com.telericacademy.web.deliverit.repositories;
 
 import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
 import com.telericacademy.web.deliverit.models.Parcel;
+import com.telericacademy.web.deliverit.repositories.contracts.ParcelRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

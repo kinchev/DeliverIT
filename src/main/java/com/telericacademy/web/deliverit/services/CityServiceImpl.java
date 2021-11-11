@@ -1,12 +1,13 @@
 package com.telericacademy.web.deliverit.services;
 
 import com.telericacademy.web.deliverit.models.City;
-import com.telericacademy.web.deliverit.repositories.CityRepository;
+import com.telericacademy.web.deliverit.repositories.contracts.CityRepository;
+import com.telericacademy.web.deliverit.services.contracts.CityService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class CityServiceImpl implements  CityService{
+public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
 

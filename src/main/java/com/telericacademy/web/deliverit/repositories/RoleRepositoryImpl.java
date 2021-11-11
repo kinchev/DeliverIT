@@ -1,11 +1,10 @@
 package com.telericacademy.web.deliverit.repositories;
 
 import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
-import com.telericacademy.web.deliverit.models.City;
 import com.telericacademy.web.deliverit.models.Role;
+import com.telericacademy.web.deliverit.repositories.contracts.RoleRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

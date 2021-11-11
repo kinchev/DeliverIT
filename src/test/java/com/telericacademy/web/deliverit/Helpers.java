@@ -1,6 +1,9 @@
 package com.telericacademy.web.deliverit;
 
 import com.telericacademy.web.deliverit.models.*;
+import com.telericacademy.web.deliverit.models.dto.ParcelDto;
+import com.telericacademy.web.deliverit.models.dto.ShipmentDto;
+import com.telericacademy.web.deliverit.models.dto.UserDto;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -85,7 +88,7 @@ public class Helpers {
         return mockDestinationWarehouse;
     }
 
-    public static Parcel createParcelDto() {
+    public static Parcel createParcel() {
         var mockParcel = new Parcel();
         mockParcel.setId(1);
         mockParcel.setUser(createMockCustomer());
@@ -110,8 +113,8 @@ public class Helpers {
     public static Shipment createMockShipment() {
         var mockShipment = new Shipment();
         mockShipment.setId(1);
-        mockShipment.setOriginWarehouseId(createMockOriginWarehouse());
-        mockShipment.setDestinationWarehouseId(createMockDestinationWarehouse());
+        mockShipment.setOriginWarehouse(createMockOriginWarehouse());
+        mockShipment.setDestinationWarehouse(createMockDestinationWarehouse());
         mockShipment.setArrivalDate(LocalDate.MAX);
         mockShipment.setDepartureDate(LocalDate.MIN);
         return mockShipment;

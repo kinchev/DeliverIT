@@ -1,6 +1,7 @@
 package com.telericacademy.web.deliverit.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Entity
@@ -92,6 +93,27 @@ public class Parcel {
     public void setDeliverToUser(boolean deliverToUser) {
         this.deliverToUser = deliverToUser;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Parcel parcel = (Parcel) o;
+        return getId() == parcel.getId() &&
+                Objects.equals(getUser(), parcel.getUser()) &&
+                Objects.equals(getOriginWarehouse(), parcel.getOriginWarehouse()) &&
+                Objects.equals(getDestinationWarehouse(), parcel.getDestinationWarehouse()) &&
+                Objects.equals(getCategory(), parcel.getCategory()) &&
+                Double.compare(getWeight(), parcel.getWeight()) == 0 &&
+                isDeliverToUser() == parcel.isDeliverToUser();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getUser(), getOriginWarehouse(), getDestinationWarehouse(),
+                getCategory(), getWeight(), isDeliverToUser());
+    }
+
 }
 
 

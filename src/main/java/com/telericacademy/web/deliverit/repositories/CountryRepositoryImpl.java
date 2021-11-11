@@ -2,7 +2,7 @@ package com.telericacademy.web.deliverit.repositories;
 
 import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
 import com.telericacademy.web.deliverit.models.Country;
-import com.telericacademy.web.deliverit.models.User;
+import com.telericacademy.web.deliverit.repositories.contracts.CountryRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

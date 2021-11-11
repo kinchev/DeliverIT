@@ -1,10 +1,10 @@
 package com.telericacademy.web.deliverit.mappers;
 
 import com.telericacademy.web.deliverit.models.Shipment;
-import com.telericacademy.web.deliverit.models.ShipmentDto;
-import com.telericacademy.web.deliverit.models.ShowShipmentDto;
+import com.telericacademy.web.deliverit.models.dto.ShipmentDto;
+import com.telericacademy.web.deliverit.models.dto.ShowShipmentDto;
 import com.telericacademy.web.deliverit.models.Warehouse;
-import com.telericacademy.web.deliverit.repositories.WarehouseRepository;
+import com.telericacademy.web.deliverit.repositories.contracts.WarehouseRepository;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,8 +33,8 @@ public class ShowShipmentMapper {
             shipment.setArrivalDate(shipmentDto.getArrivalDate());
         }
 
-        shipment.setOriginWarehouseId(originWarehouse);
-        shipment.setDestinationWarehouseId(destinationWarehouse);
+        shipment.setOriginWarehouse(originWarehouse);
+        shipment.setDestinationWarehouse(destinationWarehouse);
 
         return shipment;
 
@@ -46,18 +46,18 @@ public class ShowShipmentMapper {
 
         showShipmentDto.setOriginWarehouse(
                 String.format("Id:%d , Address: %s, %s, %s",
-                        shipment.getOriginWarehouseId().getId(),
-                        shipment.getOriginWarehouseId().getAddress().getStreetName(),
-                        shipment.getOriginWarehouseId().getAddress().getCity().getCityName(),
-                        shipment.getOriginWarehouseId().getAddress().getCity().getCountry().getCountryName()));
+                        shipment.getOriginWarehouse().getId(),
+                        shipment.getOriginWarehouse().getAddress().getStreetName(),
+                        shipment.getOriginWarehouse().getAddress().getCity().getCityName(),
+                        shipment.getOriginWarehouse().getAddress().getCity().getCountry().getCountryName()));
 
 
         showShipmentDto.setDestinationWarehouse(
                 String.format("Id:%d , Address: %s, %s, %s",
-                        shipment.getOriginWarehouseId().getId(),
-                        shipment.getDestinationWarehouseId().getAddress().getStreetName(),
-                        shipment.getDestinationWarehouseId().getAddress().getCity().getCityName(),
-                        shipment.getDestinationWarehouseId().getAddress().getCity().getCountry().getCountryName()));
+                        shipment.getOriginWarehouse().getId(),
+                        shipment.getDestinationWarehouse().getAddress().getStreetName(),
+                        shipment.getDestinationWarehouse().getAddress().getCity().getCityName(),
+                        shipment.getDestinationWarehouse().getAddress().getCity().getCountry().getCountryName()));
 
 
         showShipmentDto.setStatus(shipment.getStatus());

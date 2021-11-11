@@ -4,13 +4,13 @@ import com.telericacademy.web.deliverit.exceptions.EntityNotFoundException;
 import com.telericacademy.web.deliverit.models.Orders;
 import com.telericacademy.web.deliverit.models.Parcel;
 import com.telericacademy.web.deliverit.models.User;
+import com.telericacademy.web.deliverit.repositories.contracts.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -60,14 +60,25 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<Parcel> incomingParcels(int id) {
+    public List<Parcel> filterUserParcels(User user, Optional<String> delivered, Optional<String> preparing,
+                                          Optional<String> incoming) {
         try (Session session = sessionFactory.openSession()) {
-            getById(id);
-            Query<Orders> query = session.createQuery("from Orders where parcel.user.id=:id and shipment.departureDate<current_date and shipment.arrivalDate>current_date", Orders.class);
+            int id = (int) user.getId();
+            StringBuilder sb = new StringBuilder();
+            if (incoming.isPresent()) {
+                sb.append("from Orders where parcel.user.id=:id and shipment.departureDate<current_date and shipment.arrivalDate>current_date");
+            }
+            if (delivered.isPresent()) {
+                sb.append("from Orders where parcel.user.id=:id and shipment.arrivalDate<current_date");
+            }
+            if (preparing.isPresent()) {
+                sb.append("from Orders where parcel.user.id=:id and shipment.departureDate=null or shipment.departureDate>current_date");
+            }
+            Query<Orders> query = session.createQuery(sb.toString(), Orders.class);
             query.setParameter("id", id);
             List<Orders> orders = query.list();
             if (orders.size() == 0) {
-                throw new EntityNotFoundException("Parcel", id);
+                throw new EntityNotFoundException("The list is empty");
             }
             List<Parcel> parcels = new ArrayList<>();
             for (Orders order : orders) {
@@ -86,7 +97,7 @@ public class UserRepositoryImpl implements UserRepository {
             query.setParameter("user", user);
             List<Parcel> parcels = query.list();
             if (parcels.size() == 0) {
-                throw new IllegalArgumentException(String.format("User with email %s has no parcels", user.getEmail()));
+                throw new EntityNotFoundException(String.format("User with email %s has no parcels.", user.getEmail()));
             }
             return parcels;
         }
